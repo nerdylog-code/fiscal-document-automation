@@ -101,6 +101,20 @@ nenhuma etapa depende de alguém digitar campo.
   (`valor`, `valor_total`, `total`; `chave`, `chave_acesso`) — o adaptador de colunas está em
   `src/pipeline.py::spreadsheet_rows`.
 
+## Outros formatos fiscais (DAMEF, recibos de EFD)
+
+Os leitores de campo que escrevi para **DAMEF** e para **recibos de EFD Contribuições** existem como
+experimentos separados e continuam legíveis:
+
+- [damef-report](https://github.com/nerdylog-code/damef-report) — rótulo do contribuinte, inscrição estadual,
+  atividade, vendas e valor adicionado, com `Decimal` na conversão de número brasileiro;
+- [efd-contribuicoes-recibos](https://github.com/nerdylog-code/efd-contribuicoes-recibos) — número do recibo,
+  CNPJ, data/hora, agente receptor e período de apuração, com marcação `OK`/`INCOMPLETE`.
+
+O que **este** repositório consolida é o fluxo em volta deles: ler → aplicar regra fiscal → conciliar com a
+planilha da área → entregar a conferência pronta. É o mesmo caminho para qualquer novo tipo de documento:
+escrever o leitor e plugar em `src/pipeline.py`.
+
 ## Limites (o que este projeto NÃO é)
 
 - **Dados sintéticos**: CNPJs e chaves de acesso são gerados com DV calculado; nenhum documento, cliente ou
