@@ -1,0 +1,5 @@
+# Núcleo sem dependência externa: roda em qualquer Python 3.11+ (inclusive na máquina do usuário final,
+# sem pip, sem rede). PDF textual, XML de NF-e e XLSX são lidos com a biblioteca padrão (zlib, zipfile, ElementTree).
+#
+# Para PDFs complexos encontrados no mundo real (layout com fontes embutidas, tabelas), o único ponto a trocar é
+# src/pdf.py::read_pdf — plugue pypdf/pdfplumber ali. PDF escaneado exige OCR e está fora do escopo.

@@ -1,0 +1,50 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 447 >>
+stream
+BT
+/F1 9 Tf
+1 0 0 1 40 782 Tm
+(DANFE - DOCUMENTO AUXILIAR DE VENDA) Tj
+1 0 0 1 40 770 Tm
+(RAZAO SOCIAL: EMITENTE BETA COMERCIO LTDA) Tj
+1 0 0 1 40 758 Tm
+(CNPJ EMITENTE: 99888777000100) Tj
+1 0 0 1 40 746 Tm
+(NATUREZA DA OPERACAO: SERVICO) Tj
+1 0 0 1 40 734 Tm
+(VALOR TOTAL: 1624,92) Tj
+1 0 0 1 40 722 Tm
+(DATA DE EMISSAO: 2026-06-06) Tj
+1 0 0 1 40 710 Tm
+(CHAVE DE ACESSO:) Tj
+1 0 0 1 40 698 Tm
+(35260699888777000100550010000010551147168570) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000739 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R /Info << /Title (danfe_1055) >> >>
+startxref
+809
+%%EOF

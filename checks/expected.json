@@ -1,0 +1,195 @@
+{
+  "csv": {},
+  "sql": {},
+  "sqlite": {},
+  "xlsx": {
+    "fixtures/planilha_cliente.xlsx": {
+      "sheets": 1
+    },
+    "output/conferencia_fiscal.xlsx": {
+      "sheets": 3
+    }
+  },
+  "xml": {
+    "fixtures/xml/nfe_1000.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1001.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1002.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1004.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1005.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1006.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1008.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1009.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1010.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1012.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1013.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1014.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1016.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1017.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1018.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1020.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1021.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1022.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1024.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1025.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1026.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1028.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1029.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1030.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1032.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1033.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1034.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1036.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1037.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1038.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1040.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1041.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1042.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1044.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1045.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1046.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1048.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1049.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1050.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1052.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1053.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1054.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1056.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1057.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    },
+    "fixtures/xml/nfe_1058.xml": {
+      "children": 27,
+      "root": "nfeProc"
+    }
+  }
+}

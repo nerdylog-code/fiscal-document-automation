@@ -1,0 +1,47 @@
+{
+  "fixtures": {
+    "seed": 42,
+    "count": 60,
+    "spreadsheet": "fixtures/planilha_cliente.xlsx"
+  },
+  "reconciliation": {
+    "documents": 60,
+    "spreadsheet_rows": 61,
+    "summary": {
+      "divergencia": 5,
+      "revisao_documento": 4,
+      "duplicado": 1,
+      "ausente_na_planilha": 2,
+      "ausente_nos_documentos": 2,
+      "aprovado_automatico": 48
+    },
+    "rules_count": {
+      "valor_divergente": 3,
+      "documento_ausente_na_planilha": 2,
+      "linha_sem_documento": 2,
+      "cnpj_divergente": 1,
+      "vencimento_divergente": 1,
+      "cnpj_emitente_invalido": 1,
+      "chave_cnpj_divergente": 1,
+      "total_divergente_dos_itens": 1,
+      "cfop_incompativel": 1,
+      "chave_acesso_invalida": 1,
+      "linha_duplicada_na_planilha": 1
+    },
+    "automation_rate": 0.7742,
+    "review_words": 14
+  },
+  "impact": {
+    "documents": 60,
+    "manual_minutes_per_document_declared": 12.0,
+    "manual_hours_for_the_batch": 12.0,
+    "hours_saved": {
+      "declared": 12.0,
+      "pessimistic": 8.4,
+      "optimistic": 15.6
+    },
+    "formula": "horas_economizadas = (minutos_manuais_declarados × fator − minutos_automaticos_medidos) × documentos ÷ 60",
+    "note": "minutos manuais é PARÂMETRO DECLARADO (conferência fiscal doc a doc); o resto é medido em execução."
+  },
+  "workbook": "output/conferencia_fiscal.xlsx"
+}

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:nfeProc xmlns:ns0="http://www.portalfiscal.inf.br/nfe">
+  <ns0:NFe>
+    <ns0:infNFe Id="NFe35260611222333000181550010000010261887532602" versao="4.00">
+      <ns0:ide>
+        <ns0:nNF>1026</ns0:nNF>
+        <ns0:serie>1</ns0:serie>
+        <ns0:mod>55</ns0:mod>
+        <ns0:natOp>VENDA</ns0:natOp>
+        <ns0:dhEmi>2026-06-02T10:00:00-03:00</ns0:dhEmi>
+      </ns0:ide>
+      <ns0:emit>
+        <ns0:CNPJ>11222333000181</ns0:CNPJ>
+        <ns0:xNome>EMITENTE ALFA SERVICOS LTDA</ns0:xNome>
+      </ns0:emit>
+      <ns0:dest>
+        <ns0:CNPJ>12345678000195</ns0:CNPJ>
+      </ns0:dest>
+      <ns0:det nItem="1">
+        <ns0:prod>
+          <ns0:CFOP>5102</ns0:CFOP>
+          <ns0:vProd>2349.22</ns0:vProd>
+          <ns0:xProd>ITEM UNICO</ns0:xProd>
+        </ns0:prod>
+      </ns0:det>
+      <ns0:total>
+        <ns0:ICMSTot>
+          <ns0:vNF>2349.22</ns0:vNF>
+        </ns0:ICMSTot>
+      </ns0:total>
+      <ns0:cobr>
+        <ns0:dup>
+          <ns0:nDup>001</ns0:nDup>
+          <ns0:dVenc>2026-07-02</ns0:dVenc>
+          <ns0:vDup>2349.22</ns0:vDup>
+        </ns0:dup>
+      </ns0:cobr>
+    </ns0:infNFe>
+  </ns0:NFe>
+</ns0:nfeProc>
