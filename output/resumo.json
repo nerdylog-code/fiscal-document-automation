@@ -2,6 +2,7 @@
   "fixtures": {
     "seed": 42,
     "count": 60,
+    "generated": true,
     "spreadsheet": "fixtures/planilha_cliente.xlsx"
   },
   "reconciliation": {

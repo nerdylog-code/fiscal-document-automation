@@ -52,12 +52,12 @@ Status possíveis por documento: `aprovado_automatico`, `divergencia`, `revisao_
 |---|---|
 | Documentos no lote | 60 (15 em PDF, 45 em XML) |
 | Linhas na planilha do cliente | 61 |
-| Aprovados automaticamente | **48 (77%)** |
+| Aprovados automaticamente | **48 (77% das 62 linhas conferidas: 60 documentos + 2 linhas órfãs da planilha)** |
 | Divergências documento × planilha | 5 (3 valor, 1 CNPJ, 1 vencimento) |
 | Documentos que violam regra fiscal | 4 (chave inválida, CNPJ inválido, total ≠ itens, CFOP incompatível) |
 | Duplicidade | 1 |
 | Ausentes (cada lado) | 2 na planilha · 2 sem documento |
-| Tempo do lote | 0,01 s (medido; `output/desempenho.json`) |
+| Tempo do lote | ~0,07 s (medido na execução; fica em `output/desempenho.json`, gerado localmente e fora do versionamento) |
 | Conferência manual equivalente | 12 h (parâmetro declarado de 12 min/documento) |
 
 As divergências não são surpresa: elas são **injetadas de forma declarada** em `src/make_fixtures.py`
@@ -72,7 +72,7 @@ usuário final, muitas vezes sem permissão de instalar nada.
 
 ```bash
 make all      # gera os fixtures sintéticos e roda o pipeline completo
-make test     # 48 testes
+make test     # 53 testes
 make check    # confere os 47 artefatos contra o baseline versionado
 make repro    # roda 2x e compara o hash da planilha (precisa ser igual)
 ```
@@ -84,15 +84,23 @@ py -3 -m src.pipeline
 start output\conferencia_fiscal.xlsx
 ```
 
-Para virar rotina diária, o Agendador de Tarefas (Windows) ou o `cron` (Linux) chama
-`py -3 -m src.pipeline --fixtures "C:\documentos\dia"` e o resultado aparece na planilha de conferência —
-nenhuma etapa depende de alguém digitar campo.
+Para virar rotina diária, o Agendador de Tarefas (Windows) ou o `cron` (Linux) chama o pipeline em
+**modo lote**, apontando para a pasta onde os documentos do dia chegam:
+
+```bat
+py -3 -m src.pipeline --no-generate --fixtures "C:\documentos\dia" --out "C:\documentos\dia\out"
+```
+
+`--no-generate` é o que separa os dois modos: sem ele, o pipeline cria o lote sintético antes de
+processar (modo demo, reprodutível, usado pelos testes e pelo `make all`); com ele, o pipeline apenas
+**lê** os documentos e a planilha que já estão na pasta e não grava nada nela. A planilha do cliente deve
+estar em `planilha_cliente.xlsx` dentro desse diretório (ou ser a única planilha do lote).
 
 ## O que este repositório prova
 
 - **Regra fiscal implementada, não decorada**: o dígito verificador da chave de acesso (módulo 11 com pesos
   cíclicos 2–9) e o DV de CNPJ são calculados e conferidos contra valores conhecidos nos testes; a chave
-  ainda é validada contra o resto do documento (CNPJ, número, modelo, UF).
+  ainda é validada contra o resto do documento (CNPJ, número, modelo, UF, AAMM de emissão e série).
 - **Dinheiro em `Decimal`**, com tolerância explícita de 2 centavos — não em `float`.
 - **Achado o que foi injetado**: 12 divergências declaradas, 12 encontradas (teste de ponta a ponta).
 - **Entregável reprodutível**: mesma seed ⇒ planilha byte a byte idêntica (por isso o tempo medido fica em

@@ -41,6 +41,28 @@ def document(**overrides) -> dict:
     return base
 
 
+class KeyCoherenceTests(unittest.TestCase):
+    """A chave precisa bater com o resto do documento, não só ter DV válido."""
+
+    def test_key_with_wrong_year_month_is_rejected(self):
+        bad = key_for(VALID_CNPJ, month="9999")
+        result = validate_document(document(nfe_key=bad))
+        rules = {rule["rule"] for rule in result["regras"]}
+        self.assertIn("chave_aamm_divergente", rules)
+
+    def test_key_with_wrong_series_is_rejected(self):
+        base = key_for(VALID_CNPJ)
+        body = base[:22] + "999" + base[25:43]
+        bad = body + nfe_key_digit(body)
+        result = validate_document(document(nfe_key=bad, series="001"))
+        rules = {rule["rule"] for rule in result["regras"]}
+        self.assertIn("chave_serie_divergente", rules)
+
+    def test_coherent_key_keeps_the_document_clean(self):
+        result = validate_document(document(series="001"))
+        self.assertEqual(result["regras"], [])
+
+
 class TestRules(unittest.TestCase):
     def test_cnpj_check_digits(self):
         self.assertTrue(cnpj_is_valid(VALID_CNPJ))

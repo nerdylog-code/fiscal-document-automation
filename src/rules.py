@@ -146,6 +146,16 @@ def validate_document(document: dict, batch_keys: set[str] | None = None) -> dic
                 broke.append({"rule": "chave_cnpj_divergente", "expected": emitter, "found": parts["emitter_cnpj"]})
             if parts["model"] != "55":
                 broke.append({"rule": "modelo_inesperado", "expected": "55 (NF-e)", "found": parts["model"]})
+            issued = str(document.get("issued_at") or "")[:10]
+            if len(issued) == 10:
+                expected_aamm = issued[2:4] + issued[5:7]
+                if parts["year_month"] != expected_aamm:
+                    broke.append({"rule": "chave_aamm_divergente", "expected": expected_aamm,
+                                  "found": parts["year_month"]})
+            series = only_digits(str(document.get("series") or ""))
+            if series and parts["series"] != series.zfill(3):
+                broke.append({"rule": "chave_serie_divergente", "expected": series.zfill(3),
+                              "found": parts["series"]})
             if normalized["document_number"] and parts["number"].lstrip("0") != normalized["document_number"]:
                 broke.append({"rule": "chave_numero_divergente", "expected": normalized["document_number"],
                               "found": parts["number"].lstrip("0")})

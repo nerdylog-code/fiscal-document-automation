@@ -1,0 +1,4 @@
+# artefatos binários: nunca normalizar (evita CRLF/EOF mascararem mudança)
+*.pdf binary
+*.xlsx binary
+*.xls binary

@@ -81,15 +81,15 @@ def inspect_xml(path: pathlib.Path) -> dict:
 def collect() -> dict:
     report: dict = {"csv": {}, "sqlite": {}, "xlsx": {}, "sql": {}, "xml": {}}
     for path in walk([".csv"]):
-        report["csv"][str(path.relative_to(ROOT))] = inspect_csv(path)
+        report["csv"][path.relative_to(ROOT).as_posix()] = inspect_csv(path)
     for path in walk([".db", ".sqlite", ".sqlite3"]):
-        report["sqlite"][str(path.relative_to(ROOT))] = inspect_db(path)
+        report["sqlite"][path.relative_to(ROOT).as_posix()] = inspect_db(path)
     for path in walk([".xlsx", ".xlsm"]):
-        report["xlsx"][str(path.relative_to(ROOT))] = inspect_xlsx(path)
+        report["xlsx"][path.relative_to(ROOT).as_posix()] = inspect_xlsx(path)
     for path in walk([".sql"]):
-        report["sql"][str(path.relative_to(ROOT))] = inspect_sql(path)
+        report["sql"][path.relative_to(ROOT).as_posix()] = inspect_sql(path)
     for path in walk([".xml"]):
-        report["xml"][str(path.relative_to(ROOT))] = inspect_xml(path)
+        report["xml"][path.relative_to(ROOT).as_posix()] = inspect_xml(path)
     total = sum(len(v) for v in report.values())
     assert total > 0, "nenhum artefato de dados encontrado — a checagem não estaria verificando nada"
     return report

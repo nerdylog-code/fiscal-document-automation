@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from pathlib import Path
 import time
 
 from src.make_fixtures import generate
@@ -114,11 +115,28 @@ def estimate_impact(documents: int, elapsed_seconds: float, manual_minutes: floa
 
 
 def run(fixtures_dir: str = "fixtures", output_dir: str = "output", seed: int = 42, count: int = 60,
-        manual_minutes: float = 12.0) -> dict:
+        manual_minutes: float = 12.0, generate_fixtures: bool = True) -> dict:
+    """Conferência de um lote.
+
+    `generate_fixtures=True` cria o lote sintético antes de processar (modo demo/reprodutível).
+    `generate_fixtures=False` processa o que já existe em `fixtures_dir`, sem escrever nada nele:
+    é o modo de uso real, em que os documentos e a planilha vêm do cliente.
+    """
     started = time.perf_counter()
-    fixtures = generate(seed, count, fixtures_dir)
+    fixtures = generate(seed, count, fixtures_dir) if generate_fixtures else None
     documents = load_documents(fixtures_dir)
-    rows = spreadsheet_rows(fixtures["spreadsheet_path"])
+    spreadsheet_path = (fixtures["spreadsheet_path"] if fixtures
+                        else os.path.join(fixtures_dir, "planilha_cliente.xlsx"))
+    # caminhos vão para artefatos versionados: sempre com barra normal, senão o
+    # resumo muda entre Windows e Linux e o gate de drift do CI quebra
+    portable_spreadsheet = Path(spreadsheet_path).as_posix()
+    portable_workbook = Path(output_dir, "conferencia_fiscal.xlsx").as_posix()
+    if not os.path.exists(spreadsheet_path):
+        raise FileNotFoundError(
+            f"planilha do cliente não encontrada em {spreadsheet_path}; "
+            "informe o diretório do lote com --fixtures ou gere o lote sintético com --generate"
+        )
+    rows = spreadsheet_rows(spreadsheet_path)
     reconciliation = reconcile(documents, rows)
     elapsed = time.perf_counter() - started
 
@@ -168,10 +186,11 @@ def run(fixtures_dir: str = "fixtures", output_dir: str = "output", seed: int = 
     })
 
     result = {
-        "fixtures": {"seed": seed, "count": count, "spreadsheet": fixtures["spreadsheet_path"]},
+        "fixtures": {"seed": seed, "count": count, "generated": fixtures is not None,
+                     "spreadsheet": portable_spreadsheet},
         "reconciliation": {k: v for k, v in reconciliation.items() if k != "results"},
         "impact": business,
-        "workbook": workbook,
+        "workbook": portable_workbook,
     }
     summary_path = os.path.join(output_dir, "resumo.json")
     with open(summary_path, "w", encoding="utf-8") as fh:
@@ -192,8 +211,11 @@ def main() -> None:
     parser.add_argument("--count", type=int, default=60)
     parser.add_argument("--manual-minutes", type=float, default=12.0,
                         help="minutos de conferência manual por documento (parâmetro declarado)")
+    parser.add_argument("--no-generate", action="store_true",
+                        help="processa o lote que já está em --fixtures, sem gerar dados sintéticos")
     args = parser.parse_args()
-    result = run(args.fixtures, args.out, args.seed, args.count, args.manual_minutes)
+    result = run(args.fixtures, args.out, args.seed, args.count, args.manual_minutes,
+                 generate_fixtures=not args.no_generate)
     recon = result["reconciliation"]
     impact = result["impact"]
     performance = json.load(open(os.path.join(args.out, "desempenho.json"), encoding="utf-8"))

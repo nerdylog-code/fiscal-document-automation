@@ -127,3 +127,25 @@ class TestPipeline(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class BatchModeTests(unittest.TestCase):
+    """`--no-generate` processa o lote existente e não escreve na pasta do cliente."""
+
+    def test_no_generate_reads_existing_batch_without_writing_to_it(self):
+        with tempfile.TemporaryDirectory() as fixtures_dir, tempfile.TemporaryDirectory() as output_dir:
+            from src.make_fixtures import generate  # noqa: PLC0415
+
+            fixtures = generate(42, 6, fixtures_dir)
+            before = sorted(os.listdir(fixtures_dir))
+            result = run(fixtures_dir, output_dir, 42, 6, 12.0, generate_fixtures=False)
+            after = sorted(os.listdir(fixtures_dir))
+            self.assertEqual(before, after, "o modo lote não pode criar nem alterar arquivos na pasta de entrada")
+            self.assertEqual(result["reconciliation"]["documents"], 6)
+            self.assertFalse(result["fixtures"]["generated"])
+            self.assertEqual(result["fixtures"]["spreadsheet"], fixtures["spreadsheet_path"])
+
+    def test_no_generate_without_spreadsheet_raises_clear_error(self):
+        with tempfile.TemporaryDirectory() as empty_dir, tempfile.TemporaryDirectory() as output_dir:
+            with self.assertRaises(FileNotFoundError):
+                run(empty_dir, output_dir, 42, 6, 12.0, generate_fixtures=False)
+
