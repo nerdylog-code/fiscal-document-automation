@@ -4,6 +4,7 @@ import os
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -142,7 +143,7 @@ class BatchModeTests(unittest.TestCase):
             self.assertEqual(before, after, "o modo lote não pode criar nem alterar arquivos na pasta de entrada")
             self.assertEqual(result["reconciliation"]["documents"], 6)
             self.assertFalse(result["fixtures"]["generated"])
-            self.assertEqual(result["fixtures"]["spreadsheet"], fixtures["spreadsheet_path"])
+            self.assertEqual(result["fixtures"]["spreadsheet"], Path(fixtures["spreadsheet_path"]).as_posix())
 
     def test_no_generate_without_spreadsheet_raises_clear_error(self):
         with tempfile.TemporaryDirectory() as empty_dir, tempfile.TemporaryDirectory() as output_dir:
